@@ -5,6 +5,7 @@
   "repository": "https://github.com/JeongYeonH/node.lv2.git",
   "author": "Jeong Yeon Hwang <kukuro1995@naver.com>",
   "license": "MIT",
+  "type": "module",
   "dependencies": {
     "@prisma/client": "^5.7.1",
     "express": "^4.18.2",
