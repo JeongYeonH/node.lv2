@@ -1,24 +1,15 @@
-import express from 'express'
+
+import express from 'express';
 import reviewsRouter from './routes/reviews.router.js'
 import commentsRouter from './routes/comments.router.js'
 
-
 const app = express();
-const port = 3000;
-
-
+const PORT = 3017;
 
 app.use(express.json());
-app.use(express.urlencoded({extended:true}));
+app.use('/api', [reviewsRouter, commentsRouter]);
 
-const router = express.Router();
-
-router.get('/', (req, res) =>{
-    return res.json({message: 'Hi!'});
+app.listen(PORT, () => {
+  console.log(PORT, '포트로 서버가 열렸어요!');
 });
 
-app.use('/api', [commentsRouter, reviewsRouter])
-
-app.listen(port, () => {
-    console.log(port, "서버에 연결되었습니다.")
-})
