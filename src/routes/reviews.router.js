@@ -19,9 +19,9 @@ router.get('/reviews/:reviewId', async(req, res, next) => {
     const {reviewId} = req.params
     try{
         const review = await prisma.reviews.findFirst({
-            where: {Id: +reviewId},
+            where: {id: +reviewId},
             select: {
-                Id:true,
+                id:true,
                 bookTitle:true,
                 title:true,
                 content:true,
@@ -69,7 +69,7 @@ router.put('/reviews/:reviewId', async(req, res, next) => {
     }
     try{
         const review = await prisma.reviews.findUnique({
-            where: {Id: +reviewId},
+            where: {id: +reviewId},
         })
         if(!review){
             return res.status(400).json({errorMessage: '존재하지 않는 리뷰입니다.'})
@@ -80,7 +80,7 @@ router.put('/reviews/:reviewId', async(req, res, next) => {
         await prisma.reviews.update({
             data: { bookTitle, title, content, starRating},
             where:{
-                Id: +reviewId,
+                id: +reviewId,
                 password
             }
         })
@@ -98,13 +98,13 @@ router.delete('/reviews/:reviewId', async(req, res, next) => {
         return res.status(400).json({errorMessage:'데이터 형식이 올바르지 않습니다.'})
     }
     try{
-        const review = await prisma.reviews.findFirst({where: {Id : +reviewId}})
+        const review = await prisma.reviews.findFirst({where: {id : +reviewId}})
         if (!review){
             return res.status(400).json({errorMessage: '존재하지 않는 리뷰입니다.'})
         } else if(review.password !== password){
             return res.status(401).json({message: '비밀번호가 일치하지 않습니다'})
         }
-        await prisma.reviews.delete({where: {Id: +reviewId}})
+        await prisma.reviews.delete({where: {id: +reviewId}})
         return res.status(200).json({message:'책 리뷰를 삭제하였습니다'})
     }catch(error){
         return res.status(500).json({message: error.message})

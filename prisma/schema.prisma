@@ -13,7 +13,7 @@ datasource db {
 
 
 model Reviews {
-  Id       Int     @id @default(autoincrement())
+  id       Int     @id @default(autoincrement())
   author         String
   bookTitle      String     
   title          String 
@@ -28,7 +28,7 @@ model Reviews {
 }
 
 model Comments {
-  Id        Int   @id @default(autoincrement())
+  id        Int   @id @default(autoincrement())
   author          String
   reviewId        Int
   content         String   @db.Text
