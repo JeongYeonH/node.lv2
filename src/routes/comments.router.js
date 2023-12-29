@@ -10,7 +10,7 @@ router.post("/reviews/:reviewId/comments", async (req, res, next) => {
     const { reviewId } = req.params;
     const { author, content, password } = req.body;
     const review = await prisma.reviews.findFirst({
-      where: {Id: +reviewId}
+      where: {id: +reviewId}
     })
     if(!review){
       return res
