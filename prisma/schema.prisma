@@ -6,6 +6,37 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
+}
+
+
+
+model Reviews {
+  reviewsId      Int     @id @default(autoincrement())
+  author         String  @unique 
+  bookTitle      String     
+  reviewTitle    String 
+  reviewContent  String  @db.Text
+  star           Int     
+  password       String
+
+  createdAt DateTime     @default(now()) 
+  updatedAt DateTime     @updatedAt
+
+  @@map("Reviews")
+}
+
+
+model Comments {
+  commentId        Int      @id @default(autoincrement())
+  author           String   @unique 
+  bookTitle        String   
+  commentContent   String   @db.Text
+  password         String  
+
+  createdAt DateTime @default(now()) 
+  updatedAt DateTime @updatedAt
+
+  @@map("Comments")
 }
