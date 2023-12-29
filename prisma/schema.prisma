@@ -13,12 +13,12 @@ datasource db {
 
 
 model Reviews {
-  reviewsId      Int     @id @default(autoincrement())
-  author         String  @unique 
+  Id       Int     @id @default(autoincrement())
+  author         String
   bookTitle      String     
-  reviewTitle    String 
-  reviewContent  String  @db.Text
-  star           Int     
+  title          String 
+  content        String  @db.Text
+  starRating     Int     
   password       String
 
   createdAt DateTime     @default(now()) 
@@ -27,13 +27,12 @@ model Reviews {
   @@map("Reviews")
 }
 
-
 model Comments {
-  commentId        Int      @id @default(autoincrement())
-  author           String   @unique 
-  bookTitle        String   
-  commentContent   String   @db.Text
-  password         String  
+  Id        Int   @id @default(autoincrement())
+  author          String
+  reviewId        Int
+  content         String   @db.Text
+  password        String  
 
   createdAt DateTime @default(now()) 
   updatedAt DateTime @updatedAt
