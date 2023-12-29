@@ -9,6 +9,15 @@ router.post("/reviews/:reviewId/comments", async (req, res, next) => {
   try {
     const { reviewId } = req.params;
     const { author, content, password } = req.body;
+    const review = await prisma.reviews.findFirst({
+      where: {Id: +reviewId}
+    })
+    if(!review){
+      return res
+        .status(404)
+        .json({ errorMessage: "존재하지 않는 리뷰입니다." });
+    }
+    
 
     if (!author || !reviewId || !content || !password) {
       return res
